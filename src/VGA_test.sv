@@ -5,22 +5,24 @@ module vga(
     input  i_rst_n,
     input  i_clk_25M,
     output [7:0] VGA_B,
-	output VGA_BLANK_N,
-	output VGA_CLK,
-	output [7:0] VGA_G,
-	output VGA_HS,
-	output [7:0] VGA_R,
-	output VGA_SYNC_N,
-	output VGA_VS,
+    output VGA_BLANK_N,
+    output VGA_CLK,
+    output [7:0] VGA_G,
+    output VGA_HS,
+    output [7:0] VGA_R,
+    output VGA_SYNC_N,
+    output VGA_VS,
 );
 //  If you need RGB data from outside, define i_VGA_R, i_VGA_G, i_VGA_B as input
 //  TODO: States for FSM (if needed)
 //  Current RGB data is hard-coded!
+
 //  Variable definition
     logic [9:0] x_cnt_r, x_cnt_w;
     logic [9:0] y_cnt_r, y_cnt_w;
     logic hsync_r, hsync_w, vsync_r, vsync_w;
     logic [7:0] vga_r_r, vga_g_r, vga_b_r, vga_r_w, vga_g_w, vga_b_w;
+
 //  640*480, refresh rate 60Hz
     // VGA clock rate 25.175MHz
     localparam H_FRONT  =   16;
@@ -146,6 +148,7 @@ module vga(
             vga_b_w = 8'b11111111;
         end
     end
+
 //  Flip-flop
     always_ff @(posedge i_clk_25M or negedge i_rst_n) begin
         if (!i_rst_n) begin
